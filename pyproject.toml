@@ -1,0 +1,33 @@
+[project]
+name = "igem"
+version = "0.1.0"
+description = "Implementation of I-GEM from \"GEM-Style Constraints for PEFT with Dual Gradient Projection in LoRA\"."
+readme = "README.md"
+requires-python = ">=3.11"
+
+authors = [{name="Brian Tekmen", email="betekmen@uncg.edu"}, {name = "Jason Yin", email="j_yin@uncg.edu"}]
+license = { text="GPL" }
+dependencies = [
+                "torch==2.9.1",
+                "avalanche-lib==0.6.0", 
+                "numpy==2.3.5", 
+                "transformers==4.49.0",
+                "datasets==3.6.0",
+                "tokenizers==0.21.2",
+                "peft==0.16.0",
+                "qpsolvers",
+                "quadprog",
+                "pyyaml",
+                "pandas",
+                "matplotlib",
+                ]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["uv_build>=0.9.9,<0.12.0"]
+build-backend = "uv_build"
