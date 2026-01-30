@@ -1,0 +1,32 @@
+# Hyperparameters as reported in Appendix G.
+global:
+  seed: [0, 2, 5, 7, 11]
+  lr: [0.001]
+  n_experiences: [3]
+  memory_size: [150]
+  patterns_per_exp: [100]
+  proj_interval: [1]
+  memory_strength: [0.3]
+  train_epochs: [1]
+  train_mb_size: [32]
+  eval_mb_size: [50]
+  exp_size: [2000]
+  max_len: [512]
+  model_name: ["gpt2-medium"]
+  # "adapter" constrains the projection to the LoRA parameters, which is the
+  # setting of Eq. (2). "full" keeps the frozen base weights in the gradient
+  # vector, matching the exact-GEM cost discussed in Sec. III-D.
+  param_space: ["adapter"]
+  output_dir: ["./results/agnews/"]
+  cuda: 0
+
+plugins:
+  igem:
+    pgd_iterations: [3]
+    adaptive_lr: [true]
+    warm_start: [true]
+
+  gem: {}
+
+  agem:
+    sample_size: [256]
