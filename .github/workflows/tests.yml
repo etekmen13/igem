@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      # CPU wheels only: the tests never touch a GPU and the CUDA build is
+      # several gigabytes.
+      - name: Install
+        env:
+          UV_EXTRA_INDEX_URL: https://download.pytorch.org/whl/cpu
+          UV_INDEX_STRATEGY: unsafe-best-match
+        run: |
+          uv venv
+          uv pip install -e . pytest
+
+      - name: Run tests
+        run: uv run --no-sync pytest -q
